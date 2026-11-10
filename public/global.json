@@ -1,5 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v3.0.0/src/parser/GlobalConfigSchema.json",
-  "configsList": [],
-  "configs": {}
+  "configsList": [
+    "checkpoint-review"
+  ],
+  "configs": {
+    "checkpoint-review": {
+      "path": "checkpoint-review/config.json"
+    }
+  }
 }

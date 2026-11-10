@@ -1,0 +1,1102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v3.0.0/src/parser/StudyConfigSchema.json",
+  "studyMetadata": {
+    "title": "Checkpoint Review: Do Approvers Catch Flawed Nominations?",
+    "version": "demo-1",
+    "authors": [
+      "Joshua Cooper"
+    ],
+    "date": "2026-11-10",
+    "description": "Demo vignette study for the AI Governance in Targeting project. Participants act as approving officer for fictional SI target nominations; four of five contain a planted flaw. Fictional data only.",
+    "organizations": []
+  },
+  "uiConfig": {
+    "contactEmail": "",
+    "logoPath": "revisitAssets/revisitLogoSquare.svg",
+    "withProgressBar": true,
+    "withSidebar": true,
+    "sidebarWidth": 340,
+    "autoDownloadStudy": false
+  },
+  "importedLibraries": [
+    "nasa-tlx"
+  ],
+  "components": {
+    "welcome": {
+      "type": "markdown",
+      "path": "checkpoint-review/assets/welcome.md",
+      "response": []
+    },
+    "practice": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0400",
+        "objectType": "Supply storage site",
+        "location": "Fictional Valdora region, Sector 4, Grid 14-B",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Signals",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Consistent",
+            "status": "ok"
+          }
+        ],
+        "sourceNote": "3 of 3 independent sources agree.",
+        "reports": [
+          {
+            "id": "R-101",
+            "source": "Imagery",
+            "summary": "Activity observed at site",
+            "age": "45 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-102",
+            "source": "Signals",
+            "summary": "Pattern matches nominated activity",
+            "age": "1 hr 10 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-103",
+            "source": "Ground report",
+            "summary": "Site in use this morning",
+            "age": "2 hr",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 6 (rev 2), received 0600. No changes since nomination.",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category B, listed in FRAGO 6 Annex C",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Site is an isolated compound 1.2 km from the nearest village.",
+          "Estimated civilians within effects area: 0 to 1 (overnight caretaker possible).",
+          "Expected advantage: removes one logistics node supporting opposing forces in Sector 4."
+        ],
+        "showTips": true
+      },
+      "instruction": "**Practice trial.** The yellow tags label each panel. The oversight checklist always passes. Check the LOE panels and the expected-effects text before deciding. Answer in the sidebar.",
+      "meta": {
+        "flaw": "none",
+        "practice": true
+      },
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trials-intro": {
+      "type": "markdown",
+      "path": "checkpoint-review/assets/trials-intro.md",
+      "response": []
+    },
+    "trial-clean": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0412",
+        "objectType": "Vehicle maintenance yard",
+        "location": "Fictional Valdora region, Sector 4, Grid 22-A",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Signals",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Consistent",
+            "status": "ok"
+          }
+        ],
+        "sourceNote": "3 of 3 independent sources agree.",
+        "reports": [
+          {
+            "id": "R-101",
+            "source": "Imagery",
+            "summary": "Activity observed at site",
+            "age": "45 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-102",
+            "source": "Signals",
+            "summary": "Pattern matches nominated activity",
+            "age": "1 hr 10 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-103",
+            "source": "Ground report",
+            "summary": "Site in use this morning",
+            "age": "2 hr",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 6 (rev 2), received 0600. No changes since nomination.",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category B, listed in FRAGO 6 Annex C",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Site is an isolated compound 1.2 km from the nearest village.",
+          "Estimated civilians within effects area: 0 to 1 (overnight caretaker possible).",
+          "Expected advantage: removes one logistics node supporting opposing forces in Sector 4."
+        ],
+        "showTips": false
+      },
+      "description": "Clean nomination (control). No planted flaw.",
+      "instruction": "Review the nomination and record your decision in the sidebar.",
+      "meta": {
+        "flaw": "none",
+        "expectedDecision": "approve"
+      },
+      "correctAnswer": [
+        {
+          "id": "concern",
+          "answer": "none"
+        }
+      ],
+      "provideFeedback": false,
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trial-stale": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0419",
+        "objectType": "Command post",
+        "location": "Fictional Valdora region, Sector 4, Grid 09-F",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Signals",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Consistent",
+            "status": "ok"
+          }
+        ],
+        "sourceNote": "3 of 3 independent sources agree.",
+        "reports": [
+          {
+            "id": "R-210",
+            "source": "Ground report",
+            "summary": "Command post occupied, 6 to 8 personnel",
+            "age": "18 hr",
+            "status": "bad",
+            "statusText": "Superseded by R-214"
+          },
+          {
+            "id": "R-211",
+            "source": "Imagery",
+            "summary": "Vehicles parked at compound",
+            "age": "17 hr",
+            "status": "warn",
+            "statusText": "Older than 12 hr"
+          },
+          {
+            "id": "R-214",
+            "source": "Ground report",
+            "summary": "Compound vacated overnight; personnel moved north",
+            "age": "3 hr",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 6 (rev 2), received 0600. No changes since nomination.",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category B, listed in FRAGO 6 Annex C",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Compound sits 600 m from a farm cluster.",
+          "Estimated civilians within effects area: 0 to 2.",
+          "Expected advantage: disrupts command of opposing forces in Sector 4 if still occupied."
+        ],
+        "showTips": false
+      },
+      "description": "Planted flaw: stale / superseded report (exposed by LOE 1).",
+      "instruction": "Review the nomination and record your decision in the sidebar.",
+      "meta": {
+        "flaw": "stale",
+        "expectedDecision": "return-or-reject"
+      },
+      "correctAnswer": [
+        {
+          "id": "concern",
+          "answer": "stale"
+        }
+      ],
+      "provideFeedback": false,
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trial-criterion": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0427",
+        "objectType": "Fuel storage site",
+        "location": "Fictional Valdora region, Sector 4, Grid 31-C",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Signals",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Consistent",
+            "status": "ok"
+          }
+        ],
+        "sourceNote": "3 of 3 independent sources agree.",
+        "reports": [
+          {
+            "id": "R-101",
+            "source": "Imagery",
+            "summary": "Activity observed at site",
+            "age": "45 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-102",
+            "source": "Signals",
+            "summary": "Pattern matches nominated activity",
+            "age": "1 hr 10 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-103",
+            "source": "Ground report",
+            "summary": "Site in use this morning",
+            "age": "2 hr",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 7 (rev 3), received 0845. Nomination was generated against FRAGO 6 (rev 2).",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category D removed from Annex C in FRAGO 7",
+            "status": "bad",
+            "result": "Not met (order change)"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Site is 900 m from a highway service area.",
+          "Estimated civilians within effects area: 0 to 3.",
+          "Expected advantage: reduces fuel supply to opposing forces in Sector 4."
+        ],
+        "showTips": false
+      },
+      "description": "Planted flaw: criterion fails after order change (exposed by LOE 2).",
+      "instruction": "Review the nomination and record your decision in the sidebar.",
+      "meta": {
+        "flaw": "criterion",
+        "expectedDecision": "return-or-reject"
+      },
+      "correctAnswer": [
+        {
+          "id": "concern",
+          "answer": "criterion"
+        }
+      ],
+      "provideFeedback": false,
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trial-conflict": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0433",
+        "objectType": "Radar site",
+        "location": "Fictional Valdora region, Sector 4, Grid 17-D",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "No equipment seen",
+            "status": "bad"
+          },
+          {
+            "name": "Signals",
+            "says": "Active emissions",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Unknown / no report",
+            "status": "warn"
+          }
+        ],
+        "sourceNote": "1 of 3 sources supports the nomination. Imagery contradicts it; ground report missing.",
+        "reports": [
+          {
+            "id": "R-301",
+            "source": "Imagery",
+            "summary": "Hilltop clear; no equipment visible",
+            "age": "40 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-302",
+            "source": "Signals",
+            "summary": "Emissions consistent with radar from this grid",
+            "age": "55 min",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 6 (rev 2), received 0600. No changes since nomination.",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category B, listed in FRAGO 6 Annex C",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Hilltop site, 2 km from the nearest settlement.",
+          "Estimated civilians within effects area: 0.",
+          "Expected advantage: degrades opposing air-defense coverage in Sector 4."
+        ],
+        "showTips": false
+      },
+      "description": "Planted flaw: conflicting sources (exposed by LOE 3).",
+      "instruction": "Review the nomination and record your decision in the sidebar.",
+      "meta": {
+        "flaw": "conflict",
+        "expectedDecision": "return-or-reject"
+      },
+      "correctAnswer": [
+        {
+          "id": "concern",
+          "answer": "conflict"
+        }
+      ],
+      "provideFeedback": false,
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trial-harm": {
+      "type": "website",
+      "path": "checkpoint-review/assets/nomination-card.html",
+      "parameters": {
+        "nominationId": "N-0441",
+        "objectType": "Supply truck",
+        "location": "Fictional Valdora region, Sector 4, Grid 05-B",
+        "nominatedAt": "0912L",
+        "confidence": 92,
+        "recommendation": "Approve for engagement",
+        "checklist": [
+          "Nomination logged with timestamp and operator ID",
+          "Positive identification step recorded",
+          "Collateral estimate field completed",
+          "Legal review flag present",
+          "Approval routed to engagement authority"
+        ],
+        "sources": [
+          {
+            "name": "Imagery",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Signals",
+            "says": "Consistent",
+            "status": "ok"
+          },
+          {
+            "name": "Ground report",
+            "says": "Consistent",
+            "status": "ok"
+          }
+        ],
+        "sourceNote": "3 of 3 independent sources agree.",
+        "reports": [
+          {
+            "id": "R-101",
+            "source": "Imagery",
+            "summary": "Activity observed at site",
+            "age": "45 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-102",
+            "source": "Signals",
+            "summary": "Pattern matches nominated activity",
+            "age": "1 hr 10 min",
+            "status": "ok",
+            "statusText": "Current"
+          },
+          {
+            "id": "R-103",
+            "source": "Ground report",
+            "summary": "Site in use this morning",
+            "age": "2 hr",
+            "status": "ok",
+            "statusText": "Current"
+          }
+        ],
+        "orderRef": "Current orders: OPORD 26-04, FRAGO 6 (rev 2), received 0600. No changes since nomination.",
+        "criteria": [
+          {
+            "name": "Object category on approved list",
+            "evidence": "Category B, listed in FRAGO 6 Annex C",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Within assigned area",
+            "evidence": "Inside Sector 4 boundary",
+            "status": "ok",
+            "result": "Met"
+          },
+          {
+            "name": "Not on restricted list",
+            "evidence": "No match on restricted list",
+            "status": "ok",
+            "result": "Met"
+          }
+        ],
+        "effects": [
+          "Truck is parked beside the Grid 05-B open-air market during market hours (0800 to 1400).",
+          "Estimated civilians within effects area: 60 to 90, including vendors and shoppers.",
+          "Expected advantage: removes one supply truck; other routes and vehicles remain available to opposing forces."
+        ],
+        "showTips": false
+      },
+      "description": "Planted flaw: disproportionate expected harm (no display aid).",
+      "instruction": "Review the nomination and record your decision in the sidebar.",
+      "meta": {
+        "flaw": "harm",
+        "expectedDecision": "return-or-reject"
+      },
+      "correctAnswer": [
+        {
+          "id": "concern",
+          "answer": "harm"
+        }
+      ],
+      "provideFeedback": false,
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "Your decision as approving officer:",
+          "options": [
+            {
+              "label": "Approve",
+              "value": "approve"
+            },
+            {
+              "label": "Return for more information",
+              "value": "return"
+            },
+            {
+              "label": "Reject",
+              "value": "reject"
+            }
+          ]
+        },
+        {
+          "id": "concern",
+          "type": "radio",
+          "location": "sidebar",
+          "prompt": "What is your main concern with this nomination?",
+          "options": [
+            {
+              "label": "None, the nomination looks sound",
+              "value": "none"
+            },
+            {
+              "label": "Outdated or superseded evidence",
+              "value": "stale"
+            },
+            {
+              "label": "A target criterion is not met",
+              "value": "criterion"
+            },
+            {
+              "label": "Sources conflict",
+              "value": "conflict"
+            },
+            {
+              "label": "Expected harm is too high for the advantage",
+              "value": "harm"
+            }
+          ],
+          "withOther": true
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "prompt": "How confident are you in your decision?",
+          "numItems": 5,
+          "leftLabel": "Not confident",
+          "rightLabel": "Very confident"
+        },
+        {
+          "id": "rationale",
+          "type": "longText",
+          "location": "sidebar",
+          "prompt": "Optional: one sentence explaining your decision.",
+          "placeholder": "e.g., The key report is out of date.",
+          "required": false
+        }
+      ]
+    },
+    "trust": {
+      "type": "questionnaire",
+      "instruction": "A few questions about the system you just used.",
+      "response": [
+        {
+          "id": "trust-1",
+          "type": "likert",
+          "prompt": "I trusted the system's recommendations.",
+          "numItems": 5,
+          "leftLabel": "Strongly disagree",
+          "rightLabel": "Strongly agree"
+        },
+        {
+          "id": "trust-2",
+          "type": "likert",
+          "prompt": "The oversight checklist told me whether a nomination was sound.",
+          "numItems": 5,
+          "leftLabel": "Strongly disagree",
+          "rightLabel": "Strongly agree"
+        },
+        {
+          "id": "trust-3",
+          "type": "likert",
+          "prompt": "The evidence panels (freshness, criteria, source agreement) helped me find problems.",
+          "numItems": 5,
+          "leftLabel": "Strongly disagree",
+          "rightLabel": "Strongly agree"
+        }
+      ]
+    },
+    "debrief": {
+      "type": "markdown",
+      "path": "checkpoint-review/assets/debrief.md",
+      "response": []
+    }
+  },
+  "sequence": {
+    "order": "fixed",
+    "components": [
+      "welcome",
+      "practice",
+      "trials-intro",
+      {
+        "order": "random",
+        "components": [
+          "trial-clean",
+          "trial-stale",
+          "trial-criterion",
+          "trial-conflict",
+          "trial-harm"
+        ]
+      },
+      "$nasa-tlx.components.nasa-tlx",
+      "trust",
+      "debrief"
+    ]
+  }
+}
