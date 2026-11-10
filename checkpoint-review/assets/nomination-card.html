@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SI Target Nomination Card</title>
+  <script src="../../revisitUtilities/revisit-communicate.js"></script>
+  <style>
+    :root {
+      --bg: #f4f5f7; --card: #ffffff; --ink: #1d2433; --muted: #5d6677; --line: #d9dde4;
+      --ok: #1f7a4d; --ok-bg: #e6f4ec; --warn: #9a5b00; --warn-bg: #fff3dc;
+      --bad: #b42318; --bad-bg: #fdecea; --accent: #24427a;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 16px; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+           color: var(--ink); background: var(--bg); font-size: 14px; line-height: 1.4; }
+    .card { max-width: 980px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    .banner { background: #3a3f4b; color: #fff; font-size: 11px; letter-spacing: .08em; text-align: center; padding: 4px; }
+    header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    header h1 { margin: 0 0 4px; font-size: 18px; }
+    header .sub { color: var(--muted); font-size: 13px; }
+    .conf { text-align: right; min-width: 180px; }
+    .conf .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+    .conf .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .conf .bar { height: 6px; background: var(--line); border-radius: 3px; margin-top: 4px; }
+    .conf .bar span { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+    .rec { margin: 12px 18px 0; padding: 8px 12px; border-radius: 6px; background: #eef2fa; color: var(--accent); font-weight: 600; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 18px 18px; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; position: relative; }
+    .panel h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); display: flex; justify-content: space-between; }
+    .panel h2 .loe { font-weight: 600; color: var(--accent); }
+    .full { grid-column: 1 / -1; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    tr:last-child td { border-bottom: none; }
+    .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .ok { background: var(--ok-bg); color: var(--ok); }
+    .warn { background: var(--warn-bg); color: var(--warn); }
+    .bad { background: var(--bad-bg); color: var(--bad); }
+    ul.check { list-style: none; margin: 0; padding: 0; }
+    ul.check li { padding: 3px 0; }
+    ul.check li::before { content: "\2714"; color: var(--ok); font-weight: 700; margin-right: 8px; }
+    .agree { display: flex; gap: 6px; margin-top: 6px; }
+    .agree div { flex: 1; text-align: center; padding: 6px 4px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .effects p { margin: 4px 0; }
+    .tag { position: absolute; top: -10px; right: 10px; background: #ffd84d; color: #3a2e00; font-size: 11px; font-weight: 700;
+           padding: 2px 8px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+    .hidden { display: none; }
+    #loading { text-align: center; color: var(--muted); padding: 40px; }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading nomination…</div>
+  <div class="card hidden" id="card">
+    <div class="banner">EXERCISE — FICTIONAL SCENARIO — NOT REAL DATA</div>
+    <header>
+      <div>
+        <h1 id="title"></h1>
+        <div class="sub" id="sub"></div>
+      </div>
+      <div class="conf">
+        <div class="lbl">System confidence</div>
+        <div class="num" id="confNum"></div>
+        <div class="bar"><span id="confBar"></span></div>
+      </div>
+    </header>
+    <div class="rec" id="rec"></div>
+
+    <div class="grid">
+      <div class="panel" id="p-check">
+        <span class="tag hidden" data-tip>Oversight checklist</span>
+        <h2>Oversight checklist <span class="pill ok" id="checkSummary"></span></h2>
+        <ul class="check" id="checklist"></ul>
+      </div>
+
+      <div class="panel" id="p-sources">
+        <span class="tag hidden" data-tip>LOE 3 · Uncertainty</span>
+        <h2>Source agreement <span class="loe">LOE 3</span></h2>
+        <div class="agree" id="agree"></div>
+        <div class="note" id="agreeNote"></div>
+      </div>
+
+      <div class="panel full" id="p-fresh">
+        <span class="tag hidden" data-tip>LOE 1 · Evidence freshness</span>
+        <h2>Evidence freshness <span class="loe">LOE 1</span></h2>
+        <table>
+          <thead><tr><th>Report</th><th>Source</th><th>Summary</th><th>Age</th><th>Status</th></tr></thead>
+          <tbody id="reports"></tbody>
+        </table>
+      </div>
+
+      <div class="panel full" id="p-criteria">
+        <span class="tag hidden" data-tip>LOE 2 · Criteria validation</span>
+        <h2>Target criteria vs. current orders <span class="loe">LOE 2</span></h2>
+        <div class="note" id="orderRef" style="margin:0 0 6px"></div>
+        <table>
+          <thead><tr><th>Criterion</th><th>Evidence</th><th>Result</th></tr></thead>
+          <tbody id="criteria"></tbody>
+        </table>
+      </div>
+
+      <div class="panel full effects" id="p-effects">
+        <span class="tag hidden" data-tip>Expected effects (no tool)</span>
+        <h2>Expected effects <span class="loe" style="color:var(--muted)">Text only, no display aid</span></h2>
+        <div id="effects"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pillClass = { ok: 'ok', warn: 'warn', bad: 'bad' };
+    const el = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    function render(d) {
+      el('title').textContent = `Nomination ${d.nominationId} · ${d.objectType}`;
+      el('sub').textContent = `${d.location} · Nominated ${d.nominatedAt} by SI targeting system`;
+      el('confNum').textContent = `${d.confidence}%`;
+      el('confBar').style.width = `${d.confidence}%`;
+      el('rec').textContent = `System recommendation: ${d.recommendation}`;
+
+      el('checklist').innerHTML = d.checklist.map((c) => `<li>${esc(c)}</li>`).join('');
+      el('checkSummary').textContent = `${d.checklist.length}/${d.checklist.length} passed`;
+
+      el('agree').innerHTML = d.sources.map((s) =>
+        `<div class="${pillClass[s.status]}">${esc(s.name)}<br><span style="font-weight:400">${esc(s.says)}</span></div>`).join('');
+      el('agreeNote').textContent = d.sourceNote;
+
+      el('reports').innerHTML = d.reports.map((r) => `<tr>
+        <td>${esc(r.id)}</td><td>${esc(r.source)}</td><td>${esc(r.summary)}</td><td>${esc(r.age)}</td>
+        <td><span class="pill ${pillClass[r.status]}">${esc(r.statusText)}</span></td></tr>`).join('');
+
+      el('orderRef').textContent = d.orderRef;
+      el('criteria').innerHTML = d.criteria.map((c) => `<tr>
+        <td>${esc(c.name)}</td><td>${esc(c.evidence)}</td>
+        <td><span class="pill ${pillClass[c.status]}">${esc(c.result)}</span></td></tr>`).join('');
+
+      el('effects').innerHTML = d.effects.map((p) => `<p>${esc(p)}</p>`).join('');
+
+      if (d.showTips) document.querySelectorAll('[data-tip]').forEach((t) => t.classList.remove('hidden'));
+
+      el('loading').classList.add('hidden');
+      el('card').classList.remove('hidden');
+    }
+
+    Revisit.onDataReceive((data) => render(data));
+  </script>
+</body>
+</html>
